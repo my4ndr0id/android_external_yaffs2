@@ -542,8 +542,10 @@ int main(int argc, char *argv[])
             source_path_len = len - 4;
         } else if((len >= 6) && (!strcmp(dir + len - 6, "system"))) {
             source_path_len = len - 6;
-        } else {            
-            fprintf(stderr,"Fixstats (-f) option requested but filesystem is not data or android!\n");
+        } else if((len >= 7) && (!strcmp(dir + len - 7, "persist"))) {
+            source_path_len = len - 7;
+        } else {
+            fprintf(stderr,"Fixstats (-f) option requested but filesystem is not data, persist or android!\n");
             exit(1);
         }
         fix_stat(dir, &stats);
